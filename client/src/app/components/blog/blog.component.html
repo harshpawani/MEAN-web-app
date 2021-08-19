@@ -1,0 +1,37 @@
+<h1 class="page-header">Blog Feed</h1>
+
+<!-- <div class="row show-hide-message"
+	<div [ngClass]="messageClass">
+		{{ message }}
+	</div>
+</div> -->
+
+<button type="button" name="button" class="btn btn-warning" *ngIf="!newPost" (click)="newBlogForm()">New Post</button>
+
+<button [disabled]="loadingBlogs" type="button" name="button" *ngIf="!newPost" (click)="reloadBlogs()" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i>&nbsp;&nbsp;Reload</button>
+
+<br><br>
+
+<div *ngIf="!newPost">
+	<div class="card border-primary mb-3" >
+		<div class="card-header">
+			<h3 class="card-title">Post Title</h3>
+		</div>
+		<div class="card-body">
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad nesciunt nostrum ullam praesentium corrupti velit assumenda doloribus, incidunt quod perferendis, debitis repellendus ea excepturi facere placeat possimus libero eius. Magnam recusandae adipisci illo vitae.
+		</div>
+		<div class="card-footer">
+			<strong>Posted by: </strong>harsh
+            <br>
+			<strong>Date: </strong>Aug 19th, 2021
+            <br>
+			<div>
+				<strong>Likes: </strong>20
+                <br>
+				<strong>Dislike: </strong>21
+			</div>
+            <a href="#"><button type="button" name="button" class="btn btn-m btn-info">Edit</button></a>&nbsp;&nbsp;
+            <a href="#"><button type="button" name="button" class="btn btn-m btn-danger">Delete</button></a>
+		</div>
+	</div>
+</div>

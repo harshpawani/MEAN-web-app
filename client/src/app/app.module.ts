@@ -8,6 +8,14 @@ import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { JwtModule } from "@auth0/angular-jwt";
+import { AuthGuard } from './guards/auth.guard';
+import { AuthService } from './services/auth.service';
+import { NotauthGuard } from './guards/Notauth.guard';
+import { BlogComponent } from './components/blog/blog.component';
 
 @NgModule({
   declarations: [
@@ -15,15 +23,19 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     HomeComponent,
     DashboardComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent,
+    ProfileComponent,
+    BlogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlashMessagesModule.forRoot()
   ],
-  providers: [],
+  providers: [AuthGuard, AuthService, NotauthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

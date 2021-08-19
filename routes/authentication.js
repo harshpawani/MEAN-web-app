@@ -1,5 +1,7 @@
 const { Router } = require('express');
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
+const config = require('../config/database');
 
 module.exports = (router) => {
 
@@ -93,5 +95,67 @@ module.exports = (router) => {
             });
         }
     });
+
+    router.post('/login', (req, res) => {
+        if(!req.body.username){
+            res.json({ success: false, message: "No username was found" });
+        } else {
+                if(!req.body.password){
+                    res.json({ success: false, message: "No password was found" });
+                } else {
+                      User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
+                      	if(err){
+                      		res.json({ success: false, message: err });
+                      	} else {
+                      		if(!user) {
+                      			res.json({ success: false, message: 'Username not found' });
+                      		} else {
+                      			const validPassword = user.comparePassword(req.body.password);
+                      			if (!validPassword) {
+                                    res.json({ success: false, message: 'Password Invalid' });
+                      			} else {
+                                    const token = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24h' });
+                                    res.json({ success: true, message: 'Login Successful !', token: token, user: { username: user.username } });
+                      			}
+                      		}
+                      	}
+                      });
+                }
+        }
+    });
+
+    router.use((req, res, next) => {
+        const token = req.headers['authorization']; // Create token found in headers
+        // Check if token was found in headers
+        if (!token) {
+          res.json({ success: false, message: 'No token provided' }); // Return error
+        } else {
+          // Verify the token is valid
+          jwt.verify(token, config.secret, (err, decoded) => {
+            // Check if error is expired or invalid
+            if (err) {
+              res.json({ success: false, message: 'Token invalid: ' + err }); // Return error for token validation
+            } else {
+              req.decoded = decoded; // Create global variable to use in any request beyond
+              next(); // Exit middleware
+            }
+          });
+        }
+      });
+
+    router.get('/profile', (req, res) => {
+        User.findOne({ _id: req.decoded.userId }).select('username email').exec((err, user) => {
+            if(err){
+                res.json({ success: false, message: err });
+            } else {
+                if (!user) {
+                    res.json({ success: false, message: 'User Not Found' });
+                } else {
+                    res.json({ success: true, user: user });
+                }
+            }
+        });
+    }); 
+
     return router;
 }
