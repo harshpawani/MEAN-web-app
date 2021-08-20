@@ -32,4 +32,21 @@ export class BlogService {
     this.createAuthenticationHeaders();
     return this.http.get(this.domain + 'blogs/allBlogs', {headers: this.options});
   }
+  
+  // Function to get the blog using the id
+  getSingleBlog(id:any) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.get(this.domain + 'blogs/singleBlog/' + id, {headers: this.options})
+  }
+
+  // Function to edit/update blog post
+  editBlog(blog:any) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.put(this.domain + 'blogs/updateBlog/', blog, {headers: this.options})
+  }
+
+  deleteBlog(id:any) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.delete(this.domain + 'blogs/deleteBlog/' + id, {headers: this.options});
+  }
 }

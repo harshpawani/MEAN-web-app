@@ -76,7 +76,7 @@ export class BlogComponent implements OnInit {
     this.getAllBlogs();
     setTimeout(() => {
       this.loadingBlogs = false;
-    }, 4000);
+    }, 2000);
   }
 
   draftComment(){
@@ -107,7 +107,7 @@ export class BlogComponent implements OnInit {
           this.message = false; 
           this.form.reset(); 
           this.enableFormNewBlogForm();
-        }, 2000);
+        }, 1000);
       }
     });
   }

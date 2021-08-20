@@ -96,7 +96,7 @@ export class RegisterComponent implements OnInit {
         this.form.reset({})
         setTimeout(() => {
           this.router.navigate(['/login'])
-        }, 2000)
+        }, 1000)
       }
     });
     // console.log(this.form.get('email').value);
