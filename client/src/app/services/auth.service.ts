@@ -15,7 +15,7 @@ export interface RegisterResponse {
 })
 export class AuthService {
 
-  domain = "http://localhost:3000";
+  domain = "http://localhost:3000/";
   authToken: any;
   user: any;
   options: any;
@@ -39,19 +39,19 @@ export class AuthService {
   }
 
   registerUser(user:any){
-    return this.http.post<RegisterResponse>(this.domain + '/authentication/register', user, { headers: this.headers });
+    return this.http.post<RegisterResponse>(this.domain + 'authentication/register', user, { headers: this.headers });
   }
 
   checkUsername(username:any){
-    return this.http.get<RegisterResponse>(this.domain + '/authentication/checkUsername/' + username);
+    return this.http.get<RegisterResponse>(this.domain + 'authentication/checkUsername/' + username);
   }
 
   checkEmail(email:any){
-    return this.http.get<RegisterResponse>(this.domain + '/authentication/checkEmail/' + email);
+    return this.http.get<RegisterResponse>(this.domain + 'authentication/checkEmail/' + email);
   }
 
   login(user:any){
-    return this.http.post<RegisterResponse>(this.domain + '/authentication/login', user, { headers: this.headers });
+    return this.http.post<RegisterResponse>(this.domain + 'authentication/login', user, { headers: this.headers });
   }
 
   logout(){
@@ -69,7 +69,7 @@ export class AuthService {
 
   getProfile(){
     this.createAuthenticationHeaders();
-    return this.http.get(this.domain + '/authentication/profile', {headers: this.options}, );
+    return this.http.get(this.domain + 'authentication/profile', {headers: this.options}, );
   }
 
   loggedIn(): boolean{

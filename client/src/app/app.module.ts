@@ -12,8 +12,9 @@ import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { JwtModule } from "@auth0/angular-jwt";
-import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth.service';
+import { BlogService } from './services/blog.service'; 
+import { AuthGuard } from './guards/auth.guard';
 import { NotauthGuard } from './guards/Notauth.guard';
 import { BlogComponent } from './components/blog/blog.component';
 
@@ -35,7 +36,7 @@ import { BlogComponent } from './components/blog/blog.component';
     ReactiveFormsModule,
     FlashMessagesModule.forRoot()
   ],
-  providers: [AuthGuard, AuthService, NotauthGuard],
+  providers: [AuthGuard, AuthService, NotauthGuard, BlogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
