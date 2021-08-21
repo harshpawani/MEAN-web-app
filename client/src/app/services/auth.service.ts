@@ -69,7 +69,12 @@ export class AuthService {
 
   getProfile(){
     this.createAuthenticationHeaders();
-    return this.http.get(this.domain + 'authentication/profile', {headers: this.options}, );
+    return this.http.get(this.domain + 'authentication/profile', {headers: this.options});
+  }
+
+  getPublicProfile(username:any) {
+    this.createAuthenticationHeaders();
+    return this.http.get(this.domain + 'authentication/publicProfile/' + username, {headers: this.options});
   }
 
   loggedIn(): boolean{
