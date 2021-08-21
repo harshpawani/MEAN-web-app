@@ -1,33 +1,33 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/home">Blog</a>
+      <a class="navbar-brand" routerLink="/">Blog</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="nav navbar-nav navbar-left">
           <li class="nav-item">
-            <a  [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact: true}" class="nav-link"  routerLink="/home">Home</a>
+            <a  [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact: true}" class="nav-link"  routerLink="/">Home</a>
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="nav-item">
-                <a [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact: true}" class="nav-link" routerLink="/dashboard">Dashboard</a>
+                <a  *ngIf="!authService.loggedIn()" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact: true}" class="nav-link" routerLink="/dashboard">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Profile</a>
+                <a *ngIf="!authService.loggedIn()" class="nav-link" [routerLinkActive] = "['active']" routerLink="/profile" routerLinkActive="router-link-active">Profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Blog</a>
+                <a *ngIf="!authService.loggedIn()" class="nav-link" [routerLinkActive] = "['active']" routerLink="/blog" routerLinkActive="router-link-active">Blog</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
+                <a *ngIf="authService.loggedIn()"  class="nav-link" [routerLinkActive] = "['active']" routerLink="/login" routerLinkActive="router-link-active">Login</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Logout</a>
+                <a *ngIf="!authService.loggedIn()" class="nav-link" href="#" (click)="onLogoutClick()">Logout</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [routerLinkActive] = "['active']" routerLink="/register" routerLinkActive="router-link-active">Register</a>
+                <a *ngIf="authService.loggedIn()"  class="nav-link" [routerLinkActive] = "['active']" routerLink="/register" routerLinkActive="router-link-active">Register</a>
             </li>
         </ul>
       </div>

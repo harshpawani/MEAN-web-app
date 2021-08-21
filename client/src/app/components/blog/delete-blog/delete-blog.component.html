@@ -1,0 +1,42 @@
+<h1 class="page-header">Delete Blog</h1>
+
+<!-- Custom Success/Error Message -->
+<div class="row show-hide-message" *ngIf="message">
+  <div [ngClass]="messageClass">
+    {{ message }}
+  </div>
+</div>
+
+<!-- Modal Confirmation Window -->
+<div class="col-md-6 " *ngIf="foundBlog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 style="text-align: left;" class="modal-title">Confirm</h4>
+    </div>
+    <div class="modal-body" style="text-align: center;">
+      <p>Are you sure you would like to delete this blog?</p>
+    </div>
+    <div class="modal-footer" >
+      <button  [disabled]="processing" type="button" name="button" class="btn btn-success" (click)="deleteBlog()">Yes</button>
+
+      <a routerLink="/blog"><button [disabled]="processing" type="button" name="button" class="btn btn-danger">No</button></a>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="card border-primary mb-3">
+    <div class="card-header">
+      <h3 style="text-align: center;" class="card-title">{{ blog.title }}</h3>
+    </div>
+    <div style="text-align: center;" class="card-body">
+      {{ blog.body }}
+    </div>
+    <div class="card-footer">
+      <strong>Posted by: </strong> {{ blog.createdBy }}
+      <br />
+      <strong>Date: </strong> {{ blog.createdAt | date:'MMM dd, yyyy' }}
+    </div>
+  </div>
+
+</div>
